@@ -1,0 +1,128 @@
+<!-- Button trigger modal -->
+
+<div class="text-center">
+<h1>Welcome to Sharp.io</h1>
+<h3>A simple GUI for D3 charts</h3>
+<button id="addGraph" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
+    Add a graph
+</button>
+</div> 
+
+<div class='text-center'>
+<form ng-model='source' ng-submit='changeSource()'>
+  <div>
+      <input type="text" class="form-control"
+          id="source" ng-model="source.address" value="lineChart"/>
+  </div>
+  <button id='dataBtn' type='submit' class='btn btn-lg' data-target='#dataModal'>
+    Change Data Source
+  </button>
+</form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade requirements" id="myModalHorizontal" ng-controller = "formCtrl"tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Chart Details
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                
+                <form ng-model="requirements" ng-submit= "addGraph()" class="form-horizontal" role="form">
+
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label"
+                              for="values">Values</label>
+                      <div class="col-sm-10">
+                      <select class='selectpicker' ng-model='requirements.value'>
+                        <option ng-repeat="point in dataPoints">{{point}}</option>
+                      </select>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label"
+                          for="chart">Chart</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                            id="chart" ng-model="requirements.graph" value="lineChart"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label"
+                              for="tooltip">Tooltip Display</label>
+                      <div class="col-sm-10">
+                      <select class='selectpicker' ng-model='requirements.tooltip' multiple>
+                        <option ng-repeat="point in dataPoints">{{point}}</option>
+                      </select>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label"
+                          for="height">Height</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control"
+                            id="height" ng-model="requirements.height" value="400"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label"
+                          for="width">Width</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control"
+                            id="width" ng-model="requirements.width" value="400"/>
+                    </div>
+                  </div>
+                  <div class ='form-group'>
+                    <label class='col-sm-2 control-lable' for='color'>Color</label>
+                    <div id='colorpicker' class='col-sm-10'>
+                      <input ng-model='requirements.color' type='color' class='form-control'/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-primary" data-toggle='modal'>Create Chart</button>
+                    </div>
+                  </div>
+                </form>      
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                            Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+</div>
+
+
+<div ng-repeat="graph in graphs">
+<div id="graphs">
+<!--?prettify lang=javascript linenums=true?-->
+  <div class="col-md-offset-1 col-md-4">
+    <svg id="test{{graph.graphNumber}}"></svg>
+  </div>
+  <div class='col-md-offset-1 col-md-5' id="editor">
+  <pre>
+  {{graph.code}}
+  </pre>
+  </code>
+  </div>
+</div>
+</div>
